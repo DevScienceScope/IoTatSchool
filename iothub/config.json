@@ -1,0 +1,19 @@
+{
+  "configuration": {
+    "tech": {
+      "microbit": "false",
+      "thermal": "false",
+      "logger": "true"
+    },
+    "version": "2.0.1",
+    "location": "ScienceScope Offices"
+  },
+  "device": {
+    "deviceId": "MBxxxxxx",
+    "sharedAccessKey": "key",
+    "deviceType": "Weather Station",
+    "location": "name of device",
+    "gps": "latitude, longitude",
+    "countryCode": "GBR"
+  }
+}

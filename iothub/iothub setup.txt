@@ -1,0 +1,40 @@
+//Enable SSH
+sudo raspi-config
+
+//Connect to wifi
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+//Add below to bottom of file
+Network={
+	ssid=”network ssid”
+	psk=”network passcode”
+}
+
+sudo reboot
+sudo apt-get update
+
+//Get ipaddress
+ifconfig
+
+//Connect using sftp (FileZilla)
+Upload iothub folder to home directory
+
+//Check for python3 first
+//Install required dependencies
+sudo apt-get install python3
+sudo apt-get install python3-pip
+sudo apt-get install python3-serial
+sudo apt-get -y install python3-rpi.gpio
+
+sudo pip3 install pyowm
+sudo pip3 install paho-mqtt
+
+//Auto run
+sudo nano /etc/rc.local
+	sudo python /home/pi/iothub/control.py &
+
+//Remote connection. only needed if you want to setup
+sudo apt-get install autossh
+mkdir ~/.ssh
+tansfer id_rsa key into this newl created folder
+chmod 700 ~/.shh/id_rsa
