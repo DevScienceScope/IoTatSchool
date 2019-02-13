@@ -6,7 +6,7 @@ Connect to the IoT @ School Exploraotry https://exploratory.sciencescope.uk/expl
 ## Tested Hardware: 
 Rapsberry Pi 3
 
-## Required packages
+## install Required Packages
 ```
 sudo apt-get install screen
 
@@ -18,9 +18,6 @@ sudo apt-get install python3-serial
 
 sudo apt-get install python3-rpi.gpio
 ```
-
-
-
 
 ```
 sudo pip3 install pyowm
