@@ -72,7 +72,7 @@ def config_defaults():
 
     hubAddress = 'sciencescope.azure-devices.net'
 
-    with open("onfig.json") as config_data:
+    with open("config.json") as config_data:
         settings = json.load(config_data)
 
     deviceId = settings["device"]["deviceId"]
@@ -81,7 +81,7 @@ def config_defaults():
     location = settings["device"]["location"]
     gps = settings["device"]["gps"]
     countryCode = settings["device"]["countryCode"]
-	interval  = settings["device"]["interval"]
+    interval  = settings["device"]["interval"]
 
 #Load details used for helper
 def config_load():
