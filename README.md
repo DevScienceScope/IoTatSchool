@@ -61,6 +61,3 @@ The properties can be changed later by using the tagging system
 | gps  | Latitude, longitide  |
 | countryCode | 3 digit country code  |
 | interval  | The interval between data uploads in seconds, Default 300 seconds (5 minutes)  |
-
-## Add line to rc.local
-sudo python /home/pi/iothub/control.py &
