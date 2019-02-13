@@ -12,7 +12,7 @@ git clone https://github.com/DevScienceScope/IoTatSchool.git
 
 cd IoTatSchool/iothub
 
-sh install.sh
+sudo sh install.sh
 ```
 
 ## install.sh
