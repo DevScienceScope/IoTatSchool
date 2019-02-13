@@ -14,7 +14,7 @@ def getMAC(interface):
     return str[0:17]
 
 #Opens config file to get ftp details
-with open("config.json") as config_data:
+with open("/home/pi/IoTatSchool/iothub/config.json") as config_data:
         settings = json.load(config_data)
 
 #Sets ftp details fromn config file
@@ -26,23 +26,22 @@ thermal =       settings["configuration"]["tech"]["thermal"]
 mac = getMAC('wlan0')
 
 
-if microbit == enabled:
-    #Create moisture session
-    os.system("screen -dmS microbit")
-    #Send it command to execute in the script location
-    os.system("screen -r microbit -p0 -X stuff 'cd /home/pi/Gateway/MicroBit; sh microbit.sh'")
-    #Send carriage return to execute
-    os.system("screen -r microbit -p0 -X eval 'stuff \015'")
-    
 if logger == enabled:
     #Create logger session
     os.system("screen -dmS logger")
     #Send it command to execute in the script location
-    os.system("screen -r logger -p0 -X stuff 'cd /home/pi/iothub/weather_mqtt; sh sensorsControl.sh'")
+    os.system("screen -r logger -p0 -X stuff 'cd /home/pi/IoTatSchool/iothub; sh sensorsControl.sh'")
     #Send carriage return to execute
     os.system("screen -r logger -p0 -X eval 'stuff \015'")
+elif microbit == enabled:
+    #Create moisture session
+    os.system("screen -dmS microbit")
+    #Send it command to execute in the script location
+    os.system("screen -r microbit -p0 -X stuff 'cd /home/pi/IoTatSchool/iothub; sh microbit.sh'")
+    #Send carriage return to execute
+    os.system("screen -r microbit -p0 -X eval 'stuff \015'")
 
-if thermal == enabled:
+elif thermal == enabled:
     #Create login session
     os.system("screen -dmS thermal")
     #Send it command to execute in the script location

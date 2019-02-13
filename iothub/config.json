@@ -9,12 +9,12 @@
     "location": "ScienceScope Offices"
   },
   "device": {
-    "deviceId": "MBxxxxxx",
-    "sharedAccessKey": "key",
+    "deviceId": "MB0000",
+    "sharedAccessKey": "ZQ348nFr1XNWSZfOXdm25+JGg5+yNBrVdU0XzMcTbi4=",
     "deviceType": "Weather Station",
     "location": "name of device",
-    "gps": "latitude, longitude",
+    "gps": "0, 0",
     "countryCode": "GBR",
-    "interval":  300
+    "interval": 60
   }
 }
