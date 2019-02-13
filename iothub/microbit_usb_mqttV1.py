@@ -35,7 +35,7 @@ import requests
 import subprocess
 import os
 
-hubAddress = deviceId = sharedAccessKey = location = gps = None
+hubAddress = deviceId = sharedAccessKey = location = gps = interval = None
 
 mode = "GO"
 conn = False
@@ -67,7 +67,7 @@ def get_devices():
 
 #Details for device used in authentication on IoT Hub
 def config_defaults():
-    global hubAddress, deviceId, sharedAccessKey, deviceType, location, gps, countryCode
+    global hubAddress, deviceId, sharedAccessKey, deviceType, location, gps, countryCode, interval
     print('Loading default config settings')
 
     hubAddress = 'sciencescope.azure-devices.net'
@@ -81,6 +81,7 @@ def config_defaults():
     location = settings["device"]["location"]
     gps = settings["device"]["gps"]
     countryCode = settings["device"]["countryCode"]
+	interval  = settings["device"]["interval"]
 
 #Load details used for helper
 def config_load():
@@ -173,11 +174,11 @@ def upload_data():
     if(conn == False):
         #Not connected
         print("not connected")
-        t = Timer(300.0, upload_data)#1:30 minutes
+        t = Timer(interval, upload_data)#1:30 minutes
         t.start()
     else:
         #Restart timer
-        t = Timer(300.0, upload_data)#5 minutes
+        t = Timer(interval, upload_data)#5 minutes
         t.start()
 
         for d in range(len(devices)):
@@ -265,7 +266,7 @@ values = []
 
 
 client.connect(hubAddress, 8883)
-t = Timer(90.0, upload_data)#5 minutes
+t = Timer(90.0, upload_data)#wait 90 seconds before first upload
 t.start()
 
 ports = get_devices()

@@ -14,6 +14,7 @@
     "deviceType": "Weather Station",
     "location": "name of device",
     "gps": "latitude, longitude",
-    "countryCode": "GBR"
+    "countryCode": "GBR",
+    "interval":  300
   }
 }
