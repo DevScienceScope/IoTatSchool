@@ -7,14 +7,20 @@ Connect to the IoT @ School Exploraotry https://exploratory.sciencescope.uk/expl
 Rapsberry Pi 3
 
 ## Required packages
-screen
-python3 
-python3-pip 
-python3-serial 
-python3-rpi.gpio
+sudo apt-get install screen
 
-pip3 install pyowm
-pip3 install paho-mqtt
+sudo apt-get install python3 
+
+sudo apt-get install python3-pip 
+
+sudo apt-get install python3-serial 
+
+sudo apt-get install python3-rpi.gpio
+
+
+sudo pip3 install pyowm
+
+sudo pip3 install paho-mqtt
 
 
 ## Add line to rc.local
