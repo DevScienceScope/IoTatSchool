@@ -12,5 +12,9 @@ apt-get install $PACKAGES -y
 pip3 install pyowm
 pip3 install paho-mqtt
 
-echo "Install complete, rebooting."
-reboot
+echo "updating rc.local"
+
+sed -i 's/exit 0/sudo python /home/pi/iothub/control.py &/g' /etc/rc.local
+
+echo "IoT @ School Installed"
+echo "To set device parameters open config.json"
