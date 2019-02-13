@@ -72,7 +72,7 @@ def config_defaults():
 
     hubAddress = 'sciencescope.azure-devices.net'
 
-    with open("/home/pi/iothub/config.json") as config_data:
+    with open("onfig.json") as config_data:
         settings = json.load(config_data)
 
     deviceId = settings["device"]["deviceId"]

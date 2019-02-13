@@ -14,7 +14,7 @@ def getMAC(interface):
     return str[0:17]
 
 #Opens config file to get ftp details
-with open("/home/pi/iothub/config.json") as config_data:
+with open("config.json") as config_data:
         settings = json.load(config_data)
 
 #Sets ftp details fromn config file

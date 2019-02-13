@@ -14,7 +14,7 @@ pip3 install paho-mqtt
 
 echo "updating rc.local"
 
-sed -i 's/exit 0/sudo python /home/pi/iothub/control.py &/g' /etc/rc.local
+sed -i 's/exit 0/sudo python /home/pi/IoTatSchool/iothub/control.py &/g' /etc/rc.local
 
 echo "IoT @ School Installed"
 echo "To set device parameters open config.json"
