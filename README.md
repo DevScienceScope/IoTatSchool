@@ -6,23 +6,40 @@ Connect to the IoT @ School Exploraotry https://exploratory.sciencescope.uk/expl
 ## Tested Hardware: 
 Rapsberry Pi 3
 
-## install Required Packages
+## How to install
 ```
-sudo apt-get install screen
+git clone https://github.com/DevScienceScope/IoTatSchool.git
 
-sudo apt-get install python3 
+cd IoTatSchool/iothub
 
-sudo apt-get install python3-pip 
-
-sudo apt-get install python3-serial 
-
-sudo apt-get install python3-rpi.gpio
+sh install.sh
 ```
 
-```
-sudo pip3 install pyowm
+## install.sh
+install.sh will install all required packages and update the rc.local file so the iothub is running when the rapsberry pi turns on
 
-sudo pip3 install paho-mqtt
+```json
+{
+  "configuration": {
+    "tech": {
+      "microbit": "false",
+      "thermal": "false",
+      "logger": "true"
+    },
+    "version": "2.0.1",
+    "location": "ScienceScope Offices"
+  },
+  "device": {
+    "deviceId": "MBxxxxxx",
+    "sharedAccessKey": "key",
+    "deviceType": "Weather Station",
+    "location": "name of device",
+    "gps": "latitude, longitude",
+    "countryCode": "GBR",
+    "interval":  300
+  }
+}
+
 ```
 
 ## Add line to rc.local
