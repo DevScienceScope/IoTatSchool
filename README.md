@@ -51,6 +51,7 @@ The table below explains each property
 
 ### Device
 The properties can be changed later by using the tagging system
+
 | Property  | Description |
 | ------------- | ------------- |
 | deviceId  | Unique deviceId supplied by ScienceScope for connection to IoT @ School  |
