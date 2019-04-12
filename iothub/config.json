@@ -15,6 +15,6 @@
     "location": "name of device",
     "gps": "0, 0",
     "countryCode": "GBR",
-    "interval": 60
+    "interval": 300
   }
 }
