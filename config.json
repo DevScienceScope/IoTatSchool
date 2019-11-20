@@ -1,0 +1,21 @@
+{
+  "configuration": {
+    "tech": {
+      "microbit": "false",
+      "thermal": "false",
+      "logger": "true",
+	  "camera": "false"
+    },
+    "version": "2.0.1",
+    "location": "Downside School IT Fish Tank"
+  },
+  "device": {
+    "deviceId": "MB103012",
+    "sharedAccessKey": "YCvZZ28lKVSnY/UU+WVE3z/It6wNKPkOMp9exidVHRs=",
+    "deviceType": "IoT Logger",
+    "location": "Downside School IT Fish Tank",
+    "gps": "51.254517, -2.494608",
+    "countryCode": "GBR",
+    "interval": 300
+  }
+}
