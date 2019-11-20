@@ -3,17 +3,18 @@
     "tech": {
       "microbit": "false",
       "thermal": "false",
-      "logger": "true"
+      "logger": "true",
+	  "camera": "false"
     },
     "version": "2.0.1",
-    "location": "ScienceScope Offices"
+    "location": "Downside School IT Fish Tank"
   },
   "device": {
-    "deviceId": "MB0000",
-    "sharedAccessKey": "ZQ348nFr1XNWSZfOXdm25+JGg5+yNBrVdU0XzMcTbi4=",
-    "deviceType": "Weather Station",
-    "location": "name of device",
-    "gps": "0, 0",
+    "deviceId": "MB103012",
+    "sharedAccessKey": "YCvZZ28lKVSnY/UU+WVE3z/It6wNKPkOMp9exidVHRs=",
+    "deviceType": "IoT Logger",
+    "location": "Downside School IT Fish Tank",
+    "gps": "51.254517, -2.494608",
     "countryCode": "GBR",
     "interval": 300
   }

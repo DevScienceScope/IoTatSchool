@@ -70,7 +70,8 @@ def config_defaults():
     global hubAddress, deviceId, sharedAccessKey, deviceType, location, gps, countryCode, interval
     print('Loading default config settings')
 
-    hubAddress = 'sciencescope.azure-devices.net'
+    #hubAddress = 'sciencescope.azure-devices.net'
+    hubAddress = 'abu-dhabi.azure-devices.net'
 
     with open("config.json") as config_data:
         settings = json.load(config_data)
@@ -303,11 +304,12 @@ while True:
                 #Even though there should only be one
 
                 readings = p.readline().strip()
-                #print(readings)
+                print(readings)
 
                 if not len(readings) == 0 :   
                     readings = readings.decode()
                     readings = json.loads(readings)
+                    #print(readings)
 
                     #readings now contains the json string
                     #{"t":960583,"s":-1492758428,"n":"0616","v":26} t=MB time alive, s=MB serial number, n=sensor id Range, v = value

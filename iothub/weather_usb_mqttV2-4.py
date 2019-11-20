@@ -35,6 +35,12 @@ import requests
 import subprocess
 import os
 
+#Used for OLED
+import Adafruit_SSD1306
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+
 hubAddress = deviceId = sharedAccessKey = location = gps = interval = None
 
 mode = "GO"
@@ -150,8 +156,9 @@ def config_defaults():
     global hubAddress, deviceId, sharedAccessKey, deviceType, location, gps, countryCode, interval
     print('Loading default config settings')
 
-    hubAddress = 'sciencescope.azure-devices.net'
-    #hubAddress = 'abu-dhabi.azure-devices.net'
+    #hubAddress = 'sciencescope.azure-devices.net'
+    hubAddress = 'abu-dhabi.azure-devices.net'
+    
 
     with open("config.json") as config_data:
         settings = json.load(config_data)
@@ -188,6 +195,16 @@ def on_connect(client, userdata, flags, rc):
     global conn
     if rc == 0:
         conn = True
+        # Draw a black filled box to clear the image.
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+        draw.text((x, top),        "IoT @ School",  font=font, fill=255)
+        draw.text((x, top+8),      "Connected",  font=font, fill=255)
+        draw.text((x, top+16),     "Initialising",  font=font, fill=255)
+
+        # Display image.
+        disp.image(image)
+        disp.display()
 
 #When device disconnects from IoT Hub
 def on_disconnect(client, userdata, rc):
@@ -331,6 +348,11 @@ def upload_data():
             #msg_txt = msg_txt + msg_txt_formatted
             msg_txt = msg_txt + msg_txt_sensor
 
+
+        #Add CPU temperature from Raspberry pi
+        msg_txt = msg_txt + ",{\"idRange\":\"3141\",\"channel\":\"0\",\"value\":" + str(measure_temp()) +",\"max\":" + str(measure_temp()) +",\"min\":" + str(measure_temp()) +",\"tags\":\"Generic Sensor\",\"type\":\"CPU Temperature\"}"
+
+
         #Add end bit of json message
         msg_txt = msg_txt + msg_txt_end
 
@@ -366,6 +388,57 @@ def check_internet():
         print("No Internet!!")
         return False
 
+def measure_temp():
+    temp = os.popen("vcgencmd measure_temp").readline()
+    temp = temp.replace("'C", "")
+    return (temp.replace("temp=",""))
+
+
+# Raspberry Pi pin configuration:
+RST = 24
+
+# 128x64 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# Initialize library.
+disp.begin()
+
+# Clear display.
+disp.clear()
+disp.display()
+
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+width = disp.width
+height = disp.height
+image = Image.new('1', (width, height))
+
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
+
+# Draw a black filled box to clear the image.
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+# Draw some shapes.
+# First define some constants to allow easy resizing of shapes.
+padding = -2
+top = padding
+bottom = height-padding
+# Move left to right keeping track of the current x position for drawing shapes.
+x = 0
+
+# Load default font.
+font = ImageFont.load_default()
+
+# Draw a black filled box to clear the image.
+draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+draw.text((x, top),        "IoT @ School",  font=font, fill=255)
+draw.text((x, top+8),      "Connecting",  font=font, fill=255)
+
+# Display image.
+disp.image(image)
+disp.display()
 
 config_load()
 
@@ -430,6 +503,19 @@ while True:
             mins = []
             maxs = []
             dataPoints = 0
+
+
+        # Draw a black filled box to clear the image.
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+        draw.text((x, top),        "IoT @ School",  font=font, fill=255)
+        draw.text((x, top+8),      "Connected",  font=font, fill=255)
+        draw.text((x, top+24),     "CPU Temp: " + measure_temp(),  font=font, fill=255)
+        draw.text((x, top+32),     "Sensors Connected: " + str(len(ports)-1), font=font, fill=255)
+
+        # Display image.
+        disp.image(image)
+        disp.display()
 
         try:
             for p in ports:

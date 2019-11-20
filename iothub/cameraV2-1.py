@@ -47,10 +47,6 @@ from azure.storage.blob import ContentSettings
 
 from subprocess import call
 
-#Used for BME280
-import smbus2
-import bme280
-
 hubAddress = deviceId = sharedAccessKey = location = gps = None
 
 mode = "GO"
@@ -78,7 +74,6 @@ GPIO.output(Red, GPIO.HIGH) #Off
 GPIO.output(Camera, GPIO.LOW) #Off
 
 port = 1
-address = 0x76
 bus = smbus2.SMBus(port)
 
 #Details for device used in authentication on IoT Hub
@@ -212,18 +207,15 @@ def upload_data():
     time.sleep(2)
     camera.capture(cameraFile)
 
-    call(["./raspberrypi_capture", fileName])
-    time.sleep(10)
     GPIO.output(Camera, GPIO.LOW) #Turn camera off
 
     #Upload to blob storage
-    resp = block_blob_service = BlockBlobService(account_name='abudhabi',account_key='gOeU6pteZC/U3LnpWUmNShUJBFpttWUm7o/H9ky7pcWNQJr0/2K5q7hQMq2SRvCY2fdDALpNNuf61cermNGdrw==')
+    resp = block_blob_service = BlockBlobService(account_name='sciencescope',account_key='gsgfEufjVsGzMRyoWbkoglppAfSF2N8FPMO9FFAW8AMenu60JJBrv0jf/hkeym+TiEjnfOZboNRb+p2XE2wqJg==')
     print(resp)
+	
     resp = block_blob_service.create_container(deviceId, public_access=PublicAccess.Container)
     print(resp)
 
-    resp = block_blob_service.create_blob_from_path(deviceId,str(fileName),str(fileName),content_settings=ContentSettings(content_type="text/csv"))
-    print(resp)
     resp = block_blob_service.create_blob_from_path(deviceId,str(cameraFile),str(cameraFile),content_settings=ContentSettings(content_type="image/jpg"))
     print(resp)
 
@@ -232,11 +224,8 @@ def upload_data():
         data = bme280.sample(bus, address, calibration_params)
 
         #Message start details for jsonString SGP, GBR
-        msg_txt = "{\"deviceID\":\""+ deviceId +"\",\"tags\":\"Thermal Camera\",\"location\":\"" + gps + "\",\"locationName\":\"" + location + "\",\"" + deviceType + "\":\"Weather Station\",\"countryCode\":\"GBR\",\"dataReadings\":["
-        msg_txt_sensor = "{\"idRange\":\"4501\",\"channel\":\"0\",\"value\":"+ str(ts) +",\"tags\":\"Thermal Camera\",\"type\":\"Camera\"},"
-        msg_txt_sensor += "{\"idRange\":\"0301\",\"channel\":\"0\",\"value\":"+ str(data.pressure) +",\"tags\":\"Thermal Sensor\",\"type\":\"Camera\"},"
-        msg_txt_sensor += "{\"idRange\":\"1701\",\"channel\":\"0\",\"value\":"+ str(data.humidity) +",\"tags\":\"Thermal Sensor\",\"type\":\"Camera\"},"
-        msg_txt_sensor += "{\"idRange\":\"0501\",\"channel\":\"0\",\"value\":"+ str(data.temperature) +",\"tags\":\"Thermal Sensor\",\"type\":\"Camera\"}"
+        msg_txt = "{\"deviceID\":\""+ deviceId +"\",\"tags\":\"Camera\",\"location\":\"" + gps + "\",\"locationName\":\"" + location + "\",\"" + deviceType + "\":\"Camera\",\"countryCode\":\"GBR\",\"dataReadings\":["
+        msg_txt_sensor = "{\"idRange\":\"4501\",\"channel\":\"0\",\"value\":"+ str(ts) +",\"tags\":\"Camera\",\"type\":\"Camera\"}"
         msg_txt_end = "]}"
     except:
         #Message start details for jsonString SGP, GBR
@@ -257,10 +246,7 @@ def upload_data():
     dataPoints = 0
 
     #Delete Files
-    time.sleep(60)
-    os.remove(str(fileName))
     os.remove(str(cameraFile))
-    os.remove("IMG_0000.pgm")
 	
     
 
